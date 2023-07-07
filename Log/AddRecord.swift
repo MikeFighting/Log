@@ -28,6 +28,7 @@ struct AddRecord: View {
     @State private var description: String = ""
     @State private var beginDate: Date = Date()
     @State private var endDate: Date = Date()
+    @State private var showCustomTag = false
     
     var body: some View {
         VStack (){
@@ -81,7 +82,7 @@ struct AddRecord: View {
                 Text("工作")
                     .modifier(TagStyle(fill:.blue))
                 Button {
-                    debugPrint("clicked plus button")
+                    showCustomTag = true
                 } label: {
                     Image(systemName: "plus")
                         .font(.title3)
@@ -89,9 +90,7 @@ struct AddRecord: View {
                 }
                 Spacer()
             }
-            ColorPicker(selection: /*@START_MENU_TOKEN@*/.constant(.red)/*@END_MENU_TOKEN@*/, label: {
-                Text("选择标签的颜色:")
-            }).padding(.top, 10)
+
             Spacer()
             Button {
                 debugPrint("end Date is \(endDate)")
@@ -111,6 +110,23 @@ struct AddRecord: View {
                     }
         }
         }.padding(10)
+            .sheet(isPresented:$showCustomTag, content: {
+                TextField(text: $title) {
+                    Text("输入标签文字")
+                }
+                ColorPicker(selection: /*@START_MENU_TOKEN@*/.constant(.red)/*@END_MENU_TOKEN@*/, label: {
+                    Text("选择标签的颜色:")
+                }).padding(.top, 10)
+                ColorPicker(selection: .constant(.blue)) {
+                    Text("选择文字颜色:")
+                }
+                Button {
+                    showCustomTag = false
+                } label: {
+                    Text("完成")
+                }
+
+            })
     }
 }
 
