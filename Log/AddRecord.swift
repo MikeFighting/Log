@@ -54,7 +54,7 @@ struct AddRecord: View {
             .cornerRadius(10)
             .background {
                 RoundedRectangle(cornerRadius: 4)
-                    .foregroundColor(Color(hue: 1.0, saturation: 0.009, brightness: 0.896))
+                    .foregroundColor(Color("input_text_bg_color"))
                     
             }
             HStack{
@@ -63,7 +63,7 @@ struct AddRecord: View {
             }
             TextEditor(text: $description)
                 .scrollContentBackground(.hidden)
-                .background(Color(hue: 1.0, saturation: 0.009, brightness: 0.896))
+                .background(Color("input_text_bg_color"))
                 .font(.system(size: 18))
                 .lineSpacing(4)
                 .cornerRadius(10)

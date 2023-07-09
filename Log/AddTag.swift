@@ -26,7 +26,15 @@ struct AddTag: View {
             }
             TextField(text: $newTagName) {
                 Text("输入标签文字")
-            }.submitLabel(.done)
+            }
+            .padding(9)
+            .submitLabel(.done)
+                .background {
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundColor(Color("input_text_bg_color"))
+                        
+                }
+
             ColorPicker(selection: $newTagBgColor, label: {
                 Text("选择标签背景色:")
             }).padding(.top, 10)

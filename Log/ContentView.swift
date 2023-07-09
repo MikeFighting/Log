@@ -13,6 +13,8 @@ struct ContentView: View {
     @State var yearNum = 2023
     @State var monthNum = 6
     @State var showAddSheet = false
+    @State var evnets:[EventModel] = []
+    
     let weeks = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     
     var conlumns : [GridItem] {
@@ -108,9 +110,10 @@ struct ContentView: View {
             .padding(.trailing, 10)
             LazyVStack {
                 Section(content: {
-                    ForEach(0..<10) { id in
-                        Text("Hi");
-//                        RecordRow(index: id)
+                    if evnets.isEmpty {
+                        HomeEmptyView()
+                    } else {
+                        Text("hi")
                     }
                 }, header: {
                     HStack {
@@ -123,7 +126,8 @@ struct ContentView: View {
                             print("add one event")
                         } label: {
                             Image(systemName: "plus.circle")
-                                .font(.largeTitle)
+                                .resizable()
+                                .frame(width: 30, height: 30)
                                 .foregroundColor(.yellow)
                         }
                     }.padding(10)
