@@ -106,25 +106,44 @@ struct AddRecord: View {
                     .foregroundColor(.white)
                     .background {
                         RoundedRectangle(cornerRadius: 10.0)
-                            .frame(width: 300, height: 60)
+                            .frame(width: 300, height: 50)
                     }
         }
         }.padding(10)
             .sheet(isPresented:$showCustomTag, content: {
-                TextField(text: $title) {
-                    Text("输入标签文字")
+                VStack(alignment:.leading){
+                    Text("添加标签")
+                        .font(.title3)
+                        .padding(.top, 10)
+                    TextField(text: $title) {
+                        Text("输入标签文字")
+                    }.submitLabel(.done)
+                    ColorPicker(selection: /*@START_MENU_TOKEN@*/.constant(.red)/*@END_MENU_TOKEN@*/, label: {
+                        Text("选择标签的颜色:")
+                    }).padding(.top, 10)
+                    ColorPicker(selection: .constant(.blue)) {
+                        Text("选择文字颜色:")
+                    }
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            showCustomTag = false
+                        } label: {
+                            Text("完成")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 10.0)
+                                        .frame(width: 300, height: 50)
+                                }
+                    }
+                        Spacer()
+                    }
                 }
-                ColorPicker(selection: /*@START_MENU_TOKEN@*/.constant(.red)/*@END_MENU_TOKEN@*/, label: {
-                    Text("选择标签的颜色:")
-                }).padding(.top, 10)
-                ColorPicker(selection: .constant(.blue)) {
-                    Text("选择文字颜色:")
-                }
-                Button {
-                    showCustomTag = false
-                } label: {
-                    Text("完成")
-                }
+                .padding(.horizontal, 10)
+                .presentationDetents([.medium])
 
             })
     }
