@@ -6,11 +6,18 @@
 //
 
 import SwiftUI
+
 struct TagStyle:ViewModifier {
     let fill:Color
+    var textColor:Color = .white
+    init(fill: Color, textColor:Color = .white) {
+        self.fill = fill
+        self.textColor = textColor
+    }
+    
     func body(content: Content) -> some View {
         content
-            .foregroundColor(.white)
+            .foregroundColor(textColor)
             .padding(4)
             .background {
             Rectangle()
@@ -30,6 +37,9 @@ struct AddRecord: View {
     @State private var endDate: Date = Date()
     @State private var showCustomTag = false
     
+    @State private var newTagName: String = ""
+    @State private var newTagBgCoor: Color = .blue
+    @State private var newTagTextColor: Color = .white
     var body: some View {
         VStack (){
             Text("添加记录")
@@ -111,39 +121,7 @@ struct AddRecord: View {
         }
         }.padding(10)
             .sheet(isPresented:$showCustomTag, content: {
-                VStack(alignment:.leading){
-                    Text("添加标签")
-                        .font(.title3)
-                        .padding(.top, 10)
-                    TextField(text: $title) {
-                        Text("输入标签文字")
-                    }.submitLabel(.done)
-                    ColorPicker(selection: /*@START_MENU_TOKEN@*/.constant(.red)/*@END_MENU_TOKEN@*/, label: {
-                        Text("选择标签的颜色:")
-                    }).padding(.top, 10)
-                    ColorPicker(selection: .constant(.blue)) {
-                        Text("选择文字颜色:")
-                    }
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button {
-                            showCustomTag = false
-                        } label: {
-                            Text("完成")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10.0)
-                                        .frame(width: 300, height: 50)
-                                }
-                    }
-                        Spacer()
-                    }
-                }
-                .padding(.horizontal, 10)
-                .presentationDetents([.medium])
+                AddTag(showAddTag: $showCustomTag, newTagName: $newTagName, newTagTextColor: $newTagTextColor, newTagBgColor: $newTagBgCoor)
 
             })
     }
