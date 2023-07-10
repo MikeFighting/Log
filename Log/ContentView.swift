@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     
     @State var yearNum = 2023
     @State var monthNum = 6
     @State var showAddSheet = false
     @State var evnets:[EventModel] = []
+    @State var selectDay = Date()
     
     let weeks = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     
@@ -54,28 +54,20 @@ struct ContentView: View {
                         .foregroundColor(.yellow)
                 }
             }
-            .background { Color.green}
             .padding(5)
             HStack{
                 Spacer().frame(width: 15)
                 ForEach(weeks.indices, id: \.self){index in
                     Text(weeks[index])
                         .font(.title3)
-                        .background {
-                            Color.yellow
-                        }
                     if(index == 6) {
                         Spacer().frame(width: 15)
                     }else{
                         Spacer()
                     }
-                   
                 }
             }
             .frame(maxWidth: .infinity)
-            .background {
-                Color.green
-            }
             LazyVGrid(columns: conlumns) {
                 ForEach(daysOneMonth, id: \.self) {
                     let date = $0
@@ -98,7 +90,8 @@ struct ContentView: View {
                             .foregroundColor(isToday ? .white : .black)
                             .fontWeight(isToday ? .bold : .medium)
                             .onTapGesture {
-                                print(date)
+                                selectDay = date
+                                print("clicked on \(date)")
                         }
                         HStack() {
                             Circle().frame(width: 4,height: 4)
@@ -117,7 +110,7 @@ struct ContentView: View {
                     }
                 }, header: {
                     HStack {
-                        Text("2023年6月24日")
+                        Text(getUserDay(date:selectDay))
                             .font(.title3)
                             .fontWeight(.medium)
                         Spacer()
@@ -164,6 +157,13 @@ struct ContentView: View {
             nextMonth = 1
         }
         monthNum = nextMonth
+    }
+    
+    fileprivate func getUserDay(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy年MM月dd日"
+        let dayStr = formatter.string(from: date)
+        return dayStr
     }
     
     fileprivate func getDayNumForDate(date: Date) -> Int {

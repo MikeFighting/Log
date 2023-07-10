@@ -55,7 +55,6 @@ struct AddRecord: View {
             .background {
                 RoundedRectangle(cornerRadius: 4)
                     .foregroundColor(Color("input_text_bg_color"))
-                    
             }
             HStack{
                 Text("记录详情:").font(.title3)
@@ -70,10 +69,14 @@ struct AddRecord: View {
                 .frame(maxWidth:500,maxHeight: 250)
                 .cornerRadius(10)
                 .submitLabel(.done)
+                .onChange(of: description) { _ in
+                    if !description.filter({ $0.isNewline }).isEmpty {
+                        hideKeyboard()
+                    }
+                }
             HStack(spacing:10){
                 
                 DatePicker("开始", selection: $beginDate, displayedComponents: [.hourAndMinute])
-                
                 DatePicker("结束", selection: $endDate, in:beginDate...Date.distantFuture, displayedComponents: [.hourAndMinute]).onSubmit {
                     debugPrint("end Date is \(endDate)")
                 }
@@ -119,11 +122,20 @@ struct AddRecord: View {
                             .frame(width: 300, height: 50)
                     }
         }
-        }.padding(10)
-            .sheet(isPresented:$showCustomTag, content: {
+        }
+        .padding(10)
+        .sheet(isPresented:$showCustomTag, content: {
                 AddTag(showAddTag: $showCustomTag, newTagName: $newTagName, newTagTextColor: $newTagTextColor, newTagBgColor: $newTagBgCoor)
 
             })
+    }
+    
+    // Function to hide the keyboard
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil,
+                                        from: nil,
+                                        for: nil)
     }
 }
 
