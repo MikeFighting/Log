@@ -8,19 +8,18 @@
 import Foundation
 class EventViewModel: ObservableObject {
     private let eventCacheKey = "log_event_list"
+    private let tagCacheKey = "log_tag_list"
+    
+    var tags:[TagModel] = []
     @Published var events:[EventModel] = [] {
         didSet {
             debugPrint("did set evnets")
         }
     }
+    
     init() {
         getEvents()
-    }
-    
-    private func getEvents() {
-        guard let data:Data = UserDefaults().data(forKey: eventCacheKey),
-              let events = try? JSONDecoder().decode([EventModel].self, from: data) else { return }
-        self.events = events
+        getTags()
     }
     
     func addEvent(title:String, detail:String, tagId:String, begin:Date, end:Date) {
@@ -30,4 +29,25 @@ class EventViewModel: ObservableObject {
             UserDefaults().setValue(encodedData, forKey: eventCacheKey)
         }
     }
+    
+    func getTag(name: String) -> TagModel {
+        if let tag = tags.first(where: {$0.text == name}) {
+            return tag
+        }
+        return TagModel(id: "", text: "", textColor: "", backgroundColor: "")
+    }
+    
+    private func getEvents() {
+        guard let data:Data = UserDefaults().data(forKey: eventCacheKey),
+              let events = try? JSONDecoder().decode([EventModel].self, from: data) else { return }
+        self.events = events
+    }
+    
+    private func getTags() {
+        guard let data:Data = UserDefaults().data(forKey: tagCacheKey),
+              let tags = try? JSONDecoder().decode([TagModel].self, from: data) else { return }
+        self.tags = tags
+    }
+    
+
 }
