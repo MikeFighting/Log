@@ -10,19 +10,16 @@ import SwiftUI
 
 struct TagModel: Codable {
     
-    let id:String
     let text:String
     let textColor:String
     let backgroundColor:String
-    init(id: String, text: String, textColor: String, backgroundColor: String) {
-        self.id = id
+    init(text: String, textColor: String, backgroundColor: String) {
         self.text = text
         self.textColor = textColor
         self.backgroundColor = backgroundColor
     }
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
         self.text = try container.decode(String.self, forKey: .text)
         self.textColor = try container.decode(String.self, forKey: .textColor)
         self.backgroundColor = try container.decode(String.self, forKey: .backgroundColor)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		292A45592A5C48C40024916F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A45582A5C48C40024916F /* EventViewModel.swift */; };
 		292A455B2A5C48CC0024916F /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A455A2A5C48CC0024916F /* TagViewModel.swift */; };
+		292A45692A5D22790024916F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A45682A5D22790024916F /* Extensions.swift */; };
 		29314FC22A5AEA28008B5147 /* AddTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29314FC12A5AEA28008B5147 /* AddTag.swift */; };
 		29314FC42A5AF350008B5147 /* HomeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29314FC32A5AF350008B5147 /* HomeEmptyView.swift */; };
 		29314FC62A5AF744008B5147 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29314FC52A5AF744008B5147 /* EventModel.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		292A45582A5C48C40024916F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		292A455A2A5C48CC0024916F /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
+		292A45682A5D22790024916F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		29314FC12A5AEA28008B5147 /* AddTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTag.swift; sourceTree = "<group>"; };
 		29314FC32A5AF350008B5147 /* HomeEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyView.swift; sourceTree = "<group>"; };
 		29314FC52A5AF744008B5147 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		292A45652A5D22670024916F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				292A45682A5D22790024916F /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		29E4508B2A3B2EDB007869A2 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,7 @@
 		29E450962A3B2EDB007869A2 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				292A45652A5D22670024916F /* Extensions */,
 				292A45572A5C488C0024916F /* ViewModels */,
 				292A45562A5C48850024916F /* Views */,
 				292A45552A5C48750024916F /* Models */,
@@ -189,6 +200,7 @@
 				29314FC22A5AEA28008B5147 /* AddTag.swift in Sources */,
 				29E450982A3B2EDB007869A2 /* LogApp.swift in Sources */,
 				299E59A92A3F3FA40079552A /* AddRecord.swift in Sources */,
+				292A45692A5D22790024916F /* Extensions.swift in Sources */,
 				292A455B2A5C48CC0024916F /* TagViewModel.swift in Sources */,
 				292A45592A5C48C40024916F /* EventViewModel.swift in Sources */,
 				29314FC62A5AF744008B5147 /* EventModel.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 class EventViewModel: ObservableObject {
     private let eventCacheKey = "log_event_list"
     private let tagCacheKey = "log_tag_list"
@@ -30,11 +31,15 @@ class EventViewModel: ObservableObject {
         }
     }
     
+    func addTag(title: String, textColor: Color, backgroundColor: Color) {
+        let tag = TagModel(text: title, textColor: textColor.hexString(), backgroundColor: backgroundColor.hexString())
+    }
+    
     func getTag(name: String) -> TagModel {
         if let tag = tags.first(where: {$0.text == name}) {
             return tag
         }
-        return TagModel(id: "", text: "", textColor: "", backgroundColor: "")
+        return TagModel(text: "", textColor: "", backgroundColor: "")
     }
     
     private func getEvents() {
