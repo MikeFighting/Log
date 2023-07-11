@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EventsView: View {
     
+    @EnvironmentObject var eventViewModel: EventViewModel
     @State var yearNum = 2023
     @State var monthNum = 6
     @State var showAddSheet = false
-    @State var evnets:[EventModel] = []
     @State var selectDay = Date()
     
     let weeks = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
@@ -103,10 +103,13 @@ struct ContentView: View {
             .padding(.trailing, 10)
             LazyVStack {
                 Section(content: {
-                    if evnets.isEmpty {
+                    if eventViewModel.events.isEmpty {
                         HomeEmptyView()
                     } else {
-                        Text("hi")
+//                        Text("hi")
+                        ForEach(eventViewModel.events) { event in
+                            Text("hi")
+                        }
                     }
                 }, header: {
                     HStack {
@@ -130,6 +133,7 @@ struct ContentView: View {
             let yearAndMonth = getYearAndMonth(forDate: Date())
             yearNum = yearAndMonth.year
             monthNum = yearAndMonth.month
+            
         }.sheet(isPresented: $showAddSheet) {
             AddRecord()
         }
@@ -220,6 +224,6 @@ extension Date {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        EventsView()
     }
 }

@@ -15,7 +15,7 @@
 		299E59A72A3F0D830079552A /* RecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E59A62A3F0D830079552A /* RecordRow.swift */; };
 		299E59A92A3F3FA40079552A /* AddRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E59A82A3F3FA40079552A /* AddRecord.swift */; };
 		29E450982A3B2EDB007869A2 /* LogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E450972A3B2EDB007869A2 /* LogApp.swift */; };
-		29E4509A2A3B2EDB007869A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E450992A3B2EDB007869A2 /* ContentView.swift */; };
+		29E4509A2A3B2EDB007869A2 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E450992A3B2EDB007869A2 /* EventsView.swift */; };
 		29E4509C2A3B2EDD007869A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29E4509B2A3B2EDD007869A2 /* Assets.xcassets */; };
 		29E450A02A3B2EDD007869A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29E4509F2A3B2EDD007869A2 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -30,7 +30,7 @@
 		299E59A82A3F3FA40079552A /* AddRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecord.swift; sourceTree = "<group>"; };
 		29E450942A3B2EDB007869A2 /* Log.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Log.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29E450972A3B2EDB007869A2 /* LogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogApp.swift; sourceTree = "<group>"; };
-		29E450992A3B2EDB007869A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		29E450992A3B2EDB007869A2 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		29E4509B2A3B2EDD007869A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29E4509D2A3B2EDD007869A2 /* Log.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Log.entitlements; sourceTree = "<group>"; };
 		29E4509F2A3B2EDD007869A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		292A45562A5C48850024916F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				29E450992A3B2EDB007869A2 /* ContentView.swift */,
+				29E450992A3B2EDB007869A2 /* EventsView.swift */,
 				299E59A62A3F0D830079552A /* RecordRow.swift */,
 				299E59A82A3F3FA40079552A /* AddRecord.swift */,
 				29314FC12A5AEA28008B5147 /* AddTag.swift */,
@@ -184,7 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29E4509A2A3B2EDB007869A2 /* ContentView.swift in Sources */,
+				29E4509A2A3B2EDB007869A2 /* EventsView.swift in Sources */,
 				29314FC42A5AF350008B5147 /* HomeEmptyView.swift in Sources */,
 				29314FC22A5AEA28008B5147 /* AddTag.swift in Sources */,
 				29E450982A3B2EDB007869A2 /* LogApp.swift in Sources */,

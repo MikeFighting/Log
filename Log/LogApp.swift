@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct LogApp: App {
+    @StateObject var eventViewModel = EventViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EventsView()
+                .environmentObject(eventViewModel)
         }
     }
 }

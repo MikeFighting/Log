@@ -30,7 +30,7 @@ struct TagModel: Codable {
 
 }
 
-struct EventModel: Codable {
+struct EventModel: Codable, Identifiable {
     let id:String
     let tagId:String
     let title:String
