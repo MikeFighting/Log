@@ -106,9 +106,12 @@ struct EventsView: View {
                     if eventViewModel.events.isEmpty {
                         HomeEmptyView()
                     } else {
-//                        Text("hi")
                         ForEach(eventViewModel.events) { event in
-                            Text("hi")
+                            VStack{
+                                Text(event.title)
+                                Text(event.detail)
+                            }
+                            
                         }
                     }
                 }, header: {
