@@ -107,10 +107,13 @@ struct EventsView: View {
                         HomeEmptyView()
                     } else {
                         ForEach(eventViewModel.events) { event in
-                            VStack{
-                                Text(event.title)
-                                Text(event.detail)
-                            }
+                            HStack{
+                                VStack(alignment:.leading, spacing: 10){
+                                    Text(event.title)
+                                    Text(event.detail)
+                                }.padding(.horizontal, 12)
+                                Spacer()
+                            }.frame(width: .infinity)
                             
                         }
                     }

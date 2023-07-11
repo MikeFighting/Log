@@ -31,6 +31,8 @@ struct AddRecord: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var eventViewModel: EventViewModel
+    
     @State private var title:String = ""
     @State private var description: String = ""
     @State private var beginDate: Date = Date()
@@ -106,20 +108,23 @@ struct AddRecord: View {
 
             Spacer()
             Button {
+                let eventId = UUID().description
+                eventViewModel.addEvent(title: title, detail: description, tagId: "家务", begin: beginDate, end: endDate)
                 debugPrint("end Date is \(endDate)")
                 if #available(iOS 15, *) {
                     dismiss()
                 } else {
                     presentationMode.wrappedValue.dismiss()
                 }
+                
             } label: {
-                Text("完成")
+                Text("完成了")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                    .frame(width: 300, height: 50)
                     .background {
                         RoundedRectangle(cornerRadius: 10.0)
-                            .frame(width: 300, height: 50)
                     }
         }
         }

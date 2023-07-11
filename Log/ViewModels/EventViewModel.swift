@@ -10,7 +10,7 @@ class EventViewModel: ObservableObject {
     private let eventCacheKey = "log_event_list"
     @Published var events:[EventModel] = [] {
         didSet {
-            
+            debugPrint("did set evnets")
         }
     }
     init() {
