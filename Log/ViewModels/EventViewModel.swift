@@ -33,6 +33,10 @@ class EventViewModel: ObservableObject {
     
     func addTag(title: String, textColor: Color, backgroundColor: Color) {
         let tag = TagModel(text: title, textColor: textColor.hexString(), backgroundColor: backgroundColor.hexString())
+        tags.append(tag)
+        if let encodeData = try? JSONEncoder().encode(tags) {
+            UserDefaults().setValue(encodeData, forKey: tagCacheKey)
+        }
     }
     
     func getTag(name: String) -> TagModel {
@@ -50,7 +54,11 @@ class EventViewModel: ObservableObject {
     
     private func getTags() {
         guard let data:Data = UserDefaults().data(forKey: tagCacheKey),
-              let tags = try? JSONDecoder().decode([TagModel].self, from: data) else { return }
+              let tags = try? JSONDecoder().decode([TagModel].self, from: data) else {
+            addTag(title: "家务", textColor: Color.white, backgroundColor: Color.red)
+            addTag(title: "工作", textColor: Color.white, backgroundColor: Color.blue)
+            return
+        }
         self.tags = tags
     }
     

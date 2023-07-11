@@ -108,7 +108,7 @@ struct AddRecord: View {
 
             Spacer()
             Button {
-                let eventId = UUID().description
+                
                 eventViewModel.addEvent(title: title, detail: description, tagId: "家务", begin: beginDate, end: endDate)
                 debugPrint("end Date is \(endDate)")
                 if #available(iOS 15, *) {

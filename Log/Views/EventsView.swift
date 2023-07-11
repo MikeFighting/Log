@@ -107,13 +107,18 @@ struct EventsView: View {
                         HomeEmptyView()
                     } else {
                         ForEach(eventViewModel.events) { event in
+                            let tag = getTag(name: event.tagId)
                             HStack{
                                 VStack(alignment:.leading, spacing: 10){
                                     Text(event.title)
                                     Text(event.detail)
-                                }.padding(.horizontal, 12)
+                                }
                                 Spacer()
-                            }.frame(width: .infinity)
+                                Text(tag.text)
+                                    .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor), textColor:  Color.init(hex: tag.textColor)))
+                            }
+                            .frame(width: .infinity)
+                            .padding(.horizontal, 12)
                             
                         }
                     }
@@ -145,7 +150,7 @@ struct EventsView: View {
         }
     }
     
-    var  daysOneMonth: [Date] {
+    var daysOneMonth: [Date] {
        return getDates() ?? []
     }
     
@@ -154,6 +159,10 @@ struct EventsView: View {
         numFormatter.numberStyle = .none
         let yearStr = numFormatter.string(from: yearNum as NSNumber)
         return yearStr ?? ""
+    }
+    
+    fileprivate func getTag(name: String) -> TagModel {
+        return eventViewModel.getTag(name: name)
     }
     
     fileprivate func switchToAnotherMonth(by: Int) {
