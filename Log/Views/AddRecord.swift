@@ -57,6 +57,9 @@ struct AddRecord: View {
     @State private var endDate: Date = Date()
     @State private var showCustomTag = false
     
+    @State private var showCommitAlert = false
+    @State private var commitAlertText = ""
+    
     @State private var newTagName: String = ""
     @State private var newTagBgCoor: Color = .blue
     @State private var newTagTextColor: Color = .white
@@ -136,6 +139,12 @@ struct AddRecord: View {
             
             Spacer()
             Button {
+                let validateResult = isValidat()
+                if(validateResult.result == false) {
+                    showCommitAlert = true
+                    commitAlertText = validateResult.msg
+                    return
+                }
                 
                 eventViewModel.addEvent(title: title, detail: description, tagId: "家务", begin: beginDate, end: endDate)
                 debugPrint("end Date is \(endDate)")
@@ -156,6 +165,9 @@ struct AddRecord: View {
                     }
             }
         }
+        .alert(isPresented: $showCommitAlert, content: {
+            Alert(title: Text(commitAlertText), dismissButton:.destructive(Text("确定")))
+        })
         .padding(10)
         .sheet(isPresented:$showCustomTag, content: {
             AddTag(showAddTag: $showCustomTag, newTagName: $newTagName, newTagTextColor: $newTagTextColor, newTagBgColor: $newTagBgCoor)
@@ -169,6 +181,20 @@ struct AddRecord: View {
                                         to: nil,
                                         from: nil,
                                         for: nil)
+    }
+    
+    private func isValidat() -> (result: Bool, msg: String) {
+        if title.isEmpty {
+            return (false, "请输入标题")
+        }
+        if selectedTag.isEmpty {
+            return (false, "请选择标签")
+        }
+        if description.isEmpty {
+            return (false, "请输入详情")
+        }
+        
+        return (true, "")
     }
 }
 
