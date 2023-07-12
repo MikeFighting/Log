@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct TagModel: Codable {
-    
+struct TagModel: Codable, Identifiable {
+    let id = UUID().description
     let text:String
     let textColor:String
     let backgroundColor:String

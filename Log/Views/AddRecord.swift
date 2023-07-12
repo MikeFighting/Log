@@ -20,10 +20,28 @@ struct TagStyle:ViewModifier {
             .foregroundColor(textColor)
             .padding(4)
             .background {
-            Rectangle()
+                Rectangle()
                     .fill(fill)
                     .cornerRadius(4)
-        }
+            }
+    }
+}
+struct iOSCheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        // 1
+        Button(action: {
+            
+            // 2
+            configuration.isOn.toggle()
+            
+        }, label: {
+            HStack {
+                // 3
+                Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                
+                configuration.label
+            }
+        })
     }
 }
 
@@ -42,6 +60,8 @@ struct AddRecord: View {
     @State private var newTagName: String = ""
     @State private var newTagBgCoor: Color = .blue
     @State private var newTagTextColor: Color = .white
+    @State private var selectedTag = ""
+    
     var body: some View {
         VStack (){
             Text("添加记录")
@@ -82,20 +102,28 @@ struct AddRecord: View {
                 DatePicker("结束", selection: $endDate, in:beginDate...Date.distantFuture, displayedComponents: [.hourAndMinute]).onSubmit {
                     debugPrint("end Date is \(endDate)")
                 }
-
+                
                 Spacer()
             }.frame(maxWidth:.infinity)
-
+            
             HStack {
                 Text("选择标签:").padding(.vertical, 8)
                 Spacer()
             }
             
             HStack{
-                Text("家务")
-                    .modifier(TagStyle(fill:.red))
-                Text("工作")
-                    .modifier(TagStyle(fill:.blue))
+                ForEach(eventViewModel.tags) { tag in
+                    Group{
+                        Text(tag.text)
+                            .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor),
+                                               textColor:  Color.init(hex: tag.textColor)))
+                        Image(systemName: selectedTag == tag.text ? "checkmark.square" : "square")
+                    }
+                    .onTapGesture(perform: {
+                        selectedTag = tag.text
+                    })
+                }
+                
                 Button {
                     showCustomTag = true
                 } label: {
@@ -105,7 +133,7 @@ struct AddRecord: View {
                 }
                 Spacer()
             }
-
+            
             Spacer()
             Button {
                 
@@ -126,13 +154,13 @@ struct AddRecord: View {
                     .background {
                         RoundedRectangle(cornerRadius: 10.0)
                     }
-        }
+            }
         }
         .padding(10)
         .sheet(isPresented:$showCustomTag, content: {
-                AddTag(showAddTag: $showCustomTag, newTagName: $newTagName, newTagTextColor: $newTagTextColor, newTagBgColor: $newTagBgCoor)
-
-            })
+            AddTag(showAddTag: $showCustomTag, newTagName: $newTagName, newTagTextColor: $newTagTextColor, newTagBgColor: $newTagBgCoor)
+            
+        })
     }
     
     // Function to hide the keyboard
