@@ -11,7 +11,7 @@ class EventViewModel: ObservableObject {
     private let eventCacheKey = "log_event_list"
     private let tagCacheKey = "log_tag_list"
     
-    var tags:[TagModel] = []
+    @Published var tags:[TagModel] = []
     @Published var events:[EventModel] = [] {
         didSet {
             debugPrint("did set evnets")

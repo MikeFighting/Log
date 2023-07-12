@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddTag: View {
     
+    @EnvironmentObject var eventViewModel: EventViewModel
+    
     @Binding var showAddTag:Bool
     @Binding var newTagName:String
     @Binding var newTagTextColor:Color
@@ -52,14 +54,15 @@ struct AddTag: View {
                 Spacer()
                 Button {
                     showAddTag = false
+                    eventViewModel.addTag(title: newTagName, textColor: newTagTextColor, backgroundColor: newTagBgColor)
                 } label: {
                     Text("完成")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .frame(width: 300, height: 50)
                         .background {
                             RoundedRectangle(cornerRadius: 10.0)
-                                .frame(width: 300, height: 50)
                         }
             }
                 Spacer()
