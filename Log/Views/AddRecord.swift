@@ -146,7 +146,7 @@ struct AddRecord: View {
                     return
                 }
                 
-                eventViewModel.addEvent(title: title, detail: description, tagId: "家务", begin: beginDate, end: endDate)
+                eventViewModel.addEvent(title: title, detail: description, tagId: selectedTag, begin: beginDate, end: endDate)
                 debugPrint("end Date is \(endDate)")
                 if #available(iOS 15, *) {
                     dismiss()
