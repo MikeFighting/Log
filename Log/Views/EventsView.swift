@@ -113,6 +113,7 @@ struct EventsView: View {
                             VStack(alignment:.leading, spacing: 10){
                                 Text(event.title)
                                 Text(event.detail)
+                                    .textSelection(.enabled)
                             }
                             Spacer()
                             Text(tag.text)
@@ -121,6 +122,11 @@ struct EventsView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal, 12)
                         
+                    }.onDelete { indexSet in
+                        print("on delete")
+                    }
+                    .onMove { IndexSet, location in
+                        print("on move")
                     }
                 }
             } header: {

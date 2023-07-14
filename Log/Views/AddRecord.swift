@@ -114,9 +114,10 @@ struct AddRecord: View {
                 Spacer()
             }
             
-            HStack{
+            LazyVGrid(columns: colums, spacing: 10) {
                 ForEach(eventViewModel.tags) { tag in
-                    Group{
+                    
+                    HStack(spacing:0){
                         Text(tag.text)
                             .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor),
                                                textColor:  Color.init(hex: tag.textColor)))
@@ -125,7 +126,7 @@ struct AddRecord: View {
                     .onTapGesture(perform: {
                         selectedTag = tag.text
                     })
-                }
+                }.background(Color.red)
                 
                 Button {
                     showCustomTag = true
@@ -134,8 +135,11 @@ struct AddRecord: View {
                         .font(.title3)
                         .fontWeight(.bold)
                 }
-                Spacer()
-            }
+                
+            }.frame(maxWidth:.infinity)
+            
+            
+
             
             Spacer()
             Button {
@@ -155,7 +159,7 @@ struct AddRecord: View {
                 }
                 
             } label: {
-                Text("完成了")
+                Text("完成")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -195,6 +199,14 @@ struct AddRecord: View {
         }
         
         return (true, "")
+    }
+}
+
+extension AddRecord {
+    var colums:[GridItem] {
+        [
+            GridItem(.adaptive(minimum: 80), spacing: 10)
+        ]
     }
 }
 
