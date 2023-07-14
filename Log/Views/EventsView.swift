@@ -117,7 +117,7 @@ struct EventsView: View {
                                 Text(tag.text)
                                     .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor), textColor:  Color.init(hex: tag.textColor)))
                             }
-                            .frame(width: .infinity)
+                            .frame(maxWidth: .infinity)
                             .padding(.horizontal, 12)
                             
                         }
