@@ -15,7 +15,7 @@ struct EventsView: View {
     @State var showAddSheet = false
     @State var selectDay = Date()
     
-    let weeks = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+    let weeks = ["一", "二", "三", "四", "五", "六", "日"]
     
     var conlumns : [GridItem] {
         [
@@ -30,117 +30,120 @@ struct EventsView: View {
     }
     
     var body: some View {
-        
-        ScrollView {
-            HStack(alignment: .center) {
-                Button {
-                    switchToAnotherMonth(by: -1);
-                } label: {
-                    Image(systemName: "chevron.backward.circle")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.yellow)
-                }
-
-                Text("\(formattedYear)年\(monthNum)月")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Button {
-                    switchToAnotherMonth(by: 1);
-                } label: {
-                    Image(systemName: "chevron.right.circle")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.yellow)
-                }
-            }
-            .padding(5)
-            HStack{
-                Spacer().frame(width: 15)
-                ForEach(weeks.indices, id: \.self){index in
-                    Text(weeks[index])
-                        .font(.title3)
-                    if(index == 6) {
-                        Spacer().frame(width: 15)
-                    }else{
-                        Spacer()
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity)
-            LazyVGrid(columns: conlumns) {
-                ForEach(daysOneMonth, id: \.self) {
-                    let date = $0
-                    let day = getDayNumForDate(date: date)
-                    let isToday = date.isEqule(date: Date())
-                    VStack {
-                        Text("\(day)")
-                            .frame(width: 45,height: 45)
-                            .font(.body)
-                            .background {
-                                if (isToday) {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.yellow)
-                                }else{
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke()
-                                        .foregroundColor(.yellow)
-                                }
-                            }
-                            .foregroundColor(isToday ? .white : .black)
-                            .fontWeight(isToday ? .bold : .medium)
-                            .onTapGesture {
-                                selectDay = date
-                                print("clicked on \(date)")
-                        }
-                        HStack() {
-                            Circle().frame(width: 4,height: 4)
-                        }
-                    }
-                }
-            }
-            .padding(.leading,10)
-            .padding(.trailing, 10)
-            LazyVStack {
-                Section(content: {
-                    if eventViewModel.events.isEmpty {
-                        HomeEmptyView()
-                    } else {
-                        ForEach(eventViewModel.events) { event in
-                            let tag = getTag(name: event.tagId)
-                            HStack{
-                                VStack(alignment:.leading, spacing: 10){
-                                    Text(event.title)
-                                    Text(event.detail)
-                                }
-                                Spacer()
-                                Text(tag.text)
-                                    .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor), textColor:  Color.init(hex: tag.textColor)))
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 12)
-                            
-                        }
-                    }
-                }, header: {
-                    HStack {
-                        Text(getUserDay(date:selectDay))
+        List {
+            Section {} header: {
+                HStack(alignment: .center) {
+                    Button {
+                        switchToAnotherMonth(by: -1);
+                    } label: {
+                        Image(systemName: "chevron.backward.circle")
                             .font(.title3)
-                            .fontWeight(.medium)
-                        Spacer()
-                        Button {
-                            showAddSheet = true
-                            print("add one event")
-                        } label: {
-                            Image(systemName: "plus.circle")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.yellow)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.yellow)
+                    }
+
+                    Text("\(formattedYear)年\(monthNum)月")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    Button {
+                        switchToAnotherMonth(by: 1);
+                    } label: {
+                        Image(systemName: "chevron.right.circle")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.yellow)
+                    }
+                }
+                .frame(maxWidth:.infinity)
+                .padding(5)
+                HStack{
+                    Spacer().frame(width: 15)
+                    ForEach(weeks.indices, id: \.self){index in
+                        Text(weeks[index])
+                            .font(.title3)
+                        if(index == 6) {
+                            Spacer().frame(width: 15)
+                        }else{
+                            Spacer()
                         }
-                    }.padding(10)
-                })
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                LazyVGrid(columns: conlumns) {
+                    ForEach(daysOneMonth, id: \.self) {
+                        let date = $0
+                        let day = getDayNumForDate(date: date)
+                        let isToday = date.isEqule(date: Date())
+                        VStack {
+                            Text("\(day)")
+                                .frame(width: 45,height: 45)
+                                .font(.body)
+                                .background {
+                                    if (isToday) {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .fill(Color.yellow)
+                                    }else{
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke()
+                                            .foregroundColor(.yellow)
+                                    }
+                                }
+                                .foregroundColor(isToday ? .white : .black)
+                                .fontWeight(isToday ? .bold : .medium)
+                                .onTapGesture {
+                                    selectDay = date
+                                    print("clicked on \(date)")
+                            }
+                            HStack() {
+                                Circle().frame(width: 4,height: 4)
+                            }
+                        }
+                    }
+                }
+                .padding(.leading,10)
+                .padding(.trailing, 10)
             }
-        }.onAppear(){
+            Section {
+                if eventViewModel.events.isEmpty {
+                    HomeEmptyView()
+                } else {
+                    ForEach(eventViewModel.events) { event in
+                        let tag = getTag(name: event.tagId)
+                        HStack{
+                            VStack(alignment:.leading, spacing: 10){
+                                Text(event.title)
+                                Text(event.detail)
+                            }
+                            Spacer()
+                            Text(tag.text)
+                                .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor), textColor:  Color.init(hex: tag.textColor)))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 12)
+                        
+                    }
+                }
+            } header: {
+                HStack {
+                    Text(getUserDay(date:selectDay))
+                        .font(.title3)
+                        .fontWeight(.medium)
+                    Spacer()
+                    Button {
+                        showAddSheet = true
+                        print("add one event")
+                    } label: {
+                        Image(systemName: "plus.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.yellow)
+                    }
+                }.padding(10)
+            }
+        
+        }
+        .listStyle(.plain)
+        .onAppear(){
             let yearAndMonth = getYearAndMonth(forDate: Date())
             yearNum = yearAndMonth.year
             monthNum = yearAndMonth.month
