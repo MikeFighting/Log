@@ -126,7 +126,7 @@ struct AddRecord: View {
                                 .fontWeight(.regular)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color("AccentColor"), lineWidth: 1)
+                                        .stroke(Color.accentColor, lineWidth: 1)
                                 }
                         }
                     }else{
@@ -134,6 +134,9 @@ struct AddRecord: View {
                             .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor),
                                                textColor:  Color.init(hex: tag.textColor)))
                         Image(systemName: selectedTag == tag.text ? "checkmark.square" : "square")
+                            .font(.system(size: 20))
+                            .fontWeight(.medium)
+                            .foregroundColor(Color.init(hex: tag.backgroundColor))
                     }
                 }
                 .onTapGesture(perform: {
