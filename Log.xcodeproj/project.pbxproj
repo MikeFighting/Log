@@ -13,6 +13,7 @@
 		29314FC22A5AEA28008B5147 /* AddTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29314FC12A5AEA28008B5147 /* AddTag.swift */; };
 		29314FC42A5AF350008B5147 /* HomeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29314FC32A5AF350008B5147 /* HomeEmptyView.swift */; };
 		29314FC62A5AF744008B5147 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29314FC52A5AF744008B5147 /* EventModel.swift */; };
+		29716FC92A61922500A48EF2 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 29716FC82A61922500A48EF2 /* WrappingHStack */; };
 		299E59A72A3F0D830079552A /* RecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E59A62A3F0D830079552A /* RecordRow.swift */; };
 		299E59A92A3F3FA40079552A /* AddRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E59A82A3F3FA40079552A /* AddRecord.swift */; };
 		29E450982A3B2EDB007869A2 /* LogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E450972A3B2EDB007869A2 /* LogApp.swift */; };
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29716FC92A61922500A48EF2 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +146,9 @@
 			dependencies = (
 			);
 			name = Log;
+			packageProductDependencies = (
+				29716FC82A61922500A48EF2 /* WrappingHStack */,
+			);
 			productName = Log;
 			productReference = 29E450942A3B2EDB007869A2 /* Log.app */;
 			productType = "com.apple.product-type.application";
@@ -172,6 +177,9 @@
 				Base,
 			);
 			mainGroup = 29E4508B2A3B2EDB007869A2;
+			packageReferences = (
+				29716FC72A61922500A48EF2 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = 29E450952A3B2EDB007869A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -424,6 +432,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29716FC72A61922500A48EF2 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.10;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		29716FC82A61922500A48EF2 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29716FC72A61922500A48EF2 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29E4508C2A3B2EDB007869A2 /* Project object */;
 }

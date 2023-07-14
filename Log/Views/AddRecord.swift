@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct TagStyle:ViewModifier {
     let fill:Color
@@ -114,33 +115,31 @@ struct AddRecord: View {
                 Spacer()
             }
             
-            LazyVGrid(columns: colums, spacing: 10) {
-                ForEach(eventViewModel.tags) { tag in
-                    
-                    HStack(spacing:0){
+            WrappingHStack(allTags(), id: \.self){ tag in
+                HStack(spacing:5) {
+                    if(tag.text == "+") {
+                        Button {
+                            showCustomTag = true
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.title3)
+                                .fontWeight(.regular)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color("AccentColor"), lineWidth: 1)
+                                }
+                        }
+                    }else{
                         Text(tag.text)
                             .modifier(TagStyle(fill: Color.init(hex: tag.backgroundColor),
                                                textColor:  Color.init(hex: tag.textColor)))
                         Image(systemName: selectedTag == tag.text ? "checkmark.square" : "square")
                     }
-                    .onTapGesture(perform: {
-                        selectedTag = tag.text
-                    })
-                }.background(Color.red)
-                
-                Button {
-                    showCustomTag = true
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.title3)
-                        .fontWeight(.bold)
                 }
-                
-            }.frame(maxWidth:.infinity)
-            
-            
-
-            
+                .onTapGesture(perform: {
+                    selectedTag = tag.text
+                }).padding(5)
+            }
             Spacer()
             Button {
                 let validateResult = isValidat()
@@ -185,6 +184,13 @@ struct AddRecord: View {
                                         to: nil,
                                         from: nil,
                                         for: nil)
+    }
+    
+    private func allTags() -> [TagModel] {
+        var tags = eventViewModel.tags
+        let fakeTag = TagModel(text: "+", textColor: "0xFFF000", backgroundColor: "0xFFF000")
+        tags.append(fakeTag)
+        return tags
     }
     
     private func isValidat() -> (result: Bool, msg: String) {
