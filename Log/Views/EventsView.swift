@@ -122,11 +122,14 @@ struct EventsView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal, 12)
                         
-                    }.onDelete { indexSet in
-                        print("on delete")
+                    }.onDelete { indexSets in
+                        for i in indexSets {
+                            let deleteId = self.eventViewModel.events[i].id
+                            eventViewModel.deleteEvent(by: deleteId)
+                        }
                     }
-                    .onMove { IndexSet, location in
-                        print("on move")
+                    .onMove { indexSet, location in
+                        eventViewModel.moveEvent(indexSet: indexSet, offset: location)
                     }
                 }
             } header: {
