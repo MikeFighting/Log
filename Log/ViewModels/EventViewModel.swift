@@ -30,7 +30,7 @@ class EventViewModel: ObservableObject {
     func addEvent(title:String, detail:String, tagId:String, begin:Date, end:Date) {
         let model = EventModel(id: UUID().description, tagId: tagId, title: title, detail: detail, begin: begin, end: end)
         events.append(model)
-
+        
     }
     
     func deleteEvent(by id:String) {
@@ -61,6 +61,27 @@ class EventViewModel: ObservableObject {
         self.events = events
     }
     
+    public func getDayEvents(date: Date) -> [EventModel] {
+        let localFormatter = DateFormatter()
+        localFormatter.locale = Locale(identifier: "zh_CN")
+        localFormatter.dateStyle = DateFormatter.Style.medium
+        localFormatter.timeStyle = DateFormatter.Style.medium
+        let dateStr = localFormatter.string(from: date)
+        
+        var resultEvents:[EventModel] = []
+        let dayStr = dateStr.components(separatedBy: " ").first!
+        if let dayBegin = localFormatter.date(from: "\(dayStr) 00:00:00") {
+            if let dayEnd = Calendar.current.date(byAdding: .day, value: 1, to: dayBegin) {
+                resultEvents = events.filter { model in
+                    let isInTheDay = model.begin >= dayBegin && model.begin < dayEnd
+                    print("mike wong: isInThe day")
+                    return isInTheDay
+                }
+            }
+        }
+        return resultEvents
+    }
+    
     private func getTags() {
         guard let data:Data = UserDefaults().data(forKey: tagCacheKey),
               let tags = try? JSONDecoder().decode([TagModel].self, from: data) else {
@@ -82,5 +103,5 @@ class EventViewModel: ObservableObject {
             UserDefaults().setValue(encodedData, forKey: eventCacheKey)
         }
     }
-
+    
 }

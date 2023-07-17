@@ -104,10 +104,10 @@ struct EventsView: View {
                 .padding(.trailing, 10)
             }
             Section {
-                if eventViewModel.events.isEmpty {
+                if getEvents(for: selectDay).isEmpty {
                     HomeEmptyView()
                 } else {
-                    ForEach(eventViewModel.events) { event in
+                    ForEach(getEvents(for: selectDay)) { event in
                         let tag = getTag(name: event.tagId)
                         HStack{
                             VStack(alignment:.leading, spacing: 10){
@@ -124,7 +124,7 @@ struct EventsView: View {
                         
                     }.onDelete { indexSets in
                         for i in indexSets {
-                            let deleteId = self.eventViewModel.events[i].id
+                            let deleteId = getEvents(for: selectDay)[i].id
                             eventViewModel.deleteEvent(by: deleteId)
                         }
                     }
@@ -171,6 +171,10 @@ struct EventsView: View {
         numFormatter.numberStyle = .none
         let yearStr = numFormatter.string(from: yearNum as NSNumber)
         return yearStr ?? ""
+    }
+    
+    func getEvents(for date: Date) -> [EventModel] {
+       return eventViewModel.getDayEvents(date: date)
     }
     
     fileprivate func getTag(name: String) -> TagModel {
