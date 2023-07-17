@@ -74,6 +74,7 @@ struct EventsView: View {
                         let date = $0
                         let day = getDayNumForDate(date: date)
                         let isToday = date.isEqule(date: Date())
+                        let isSelectDay = date.isEqule(date: selectDay)
                         VStack {
                             Text("\(day)")
                                 .frame(width: 45,height: 45)
@@ -81,7 +82,10 @@ struct EventsView: View {
                                 .background {
                                     if (isToday) {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .fill(Color.yellow)
+                                            .fill(Color.accentColor)
+                                    }else if(isSelectDay){
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .fill(Color("theme_light_yellow"))
                                     }else{
                                         RoundedRectangle(cornerRadius: 5)
                                             .stroke()
@@ -248,7 +252,6 @@ extension Date {
         let current = dateFormater.string(from: self)
         let other = dateFormater.string(from: date)
         let isEqual = current == other
-        debugPrint("current = \(current) and other = \(other) isEqual = \(isEqual)")
         return isEqual;
     }
 }
