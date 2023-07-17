@@ -30,6 +30,7 @@ struct EventsView: View {
     }
     
     var body: some View {
+        
         List {
             Section {} header: {
                 HStack(alignment: .center) {
@@ -99,8 +100,17 @@ struct EventsView: View {
                                     print("clicked on \(date)")
                             }
                             HStack() {
-                                Circle().frame(width: 4,height: 4)
-                            }
+                                let eventsOfDay = getEvents(for: date)
+                                let actualNum = eventsOfDay.count
+                                let num = actualNum >= 3 ? 3: actualNum
+                                
+                                ForEach(eventsOfDay[0..<num]) { event in
+                                    let tag = getTag(name: event.tagId)
+                                    Circle()
+                                        .frame(width: 4,height: 4)
+                                        .foregroundColor(Color.init(hex: tag.backgroundColor))
+                                }
+                            }.frame(height:6)
                         }
                     }
                 }
