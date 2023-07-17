@@ -8,43 +8,6 @@
 import SwiftUI
 import WrappingHStack
 
-struct TagStyle:ViewModifier {
-    let fill:Color
-    var textColor:Color = .white
-    init(fill: Color, textColor:Color = .white) {
-        self.fill = fill
-        self.textColor = textColor
-    }
-    
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(textColor)
-            .padding(4)
-            .background {
-                Rectangle()
-                    .fill(fill)
-                    .cornerRadius(4)
-            }
-    }
-}
-struct iOSCheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        // 1
-        Button(action: {
-            
-            // 2
-            configuration.isOn.toggle()
-            
-        }, label: {
-            HStack {
-                // 3
-                Image(systemName: configuration.isOn ? "checkmark.square" : "square")
-                
-                configuration.label
-            }
-        })
-    }
-}
 
 struct AddRecord: View {
     
@@ -52,10 +15,11 @@ struct AddRecord: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var eventViewModel: EventViewModel
     
+    @Binding public var beginDate: Date
+    @Binding public var endDate: Date
+    
     @State private var title:String = ""
     @State private var description: String = ""
-    @State private var beginDate: Date = Date()
-    @State private var endDate: Date = Date()
     @State private var showCustomTag = false
     
     @State private var showCommitAlert = false
@@ -219,8 +183,29 @@ extension AddRecord {
     }
 }
 
-struct AddRecord_Previews: PreviewProvider {
-    static var previews: some View {
-        AddRecord()
+struct TagStyle:ViewModifier {
+    let fill:Color
+    var textColor:Color = .white
+    init(fill: Color, textColor:Color = .white) {
+        self.fill = fill
+        self.textColor = textColor
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(textColor)
+            .padding(4)
+            .background {
+                Rectangle()
+                    .fill(fill)
+                    .cornerRadius(4)
+            }
     }
 }
+
+//struct AddRecord_Previews: PreviewProvider {
+//    @State var begin:Date = Date()
+//    static var previews: some View {
+//        AddRecord(beginDate: $begin, endDate: $begin)
+//    }
+//}

@@ -166,7 +166,7 @@ struct EventsView: View {
             monthNum = yearAndMonth.month
             
         }.sheet(isPresented: $showAddSheet) {
-            AddRecord()
+            AddRecord(beginDate: $selectDay, endDate: $selectDay)
         }
     }
     

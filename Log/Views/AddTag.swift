@@ -34,7 +34,6 @@ struct AddTag: View {
                 .background {
                     RoundedRectangle(cornerRadius: 4)
                         .foregroundColor(Color("input_text_bg_color"))
-                        
                 }
 
             ColorPicker(selection: $newTagBgColor, label: {
