@@ -82,15 +82,9 @@ struct EventsView: View {
                                 .font(.body)
                                 .background {
                                     if (isToday) {
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .fill(Color.accentColor)
+                                        Circle().fill(Color.accentColor)
                                     }else if(isSelectDay){
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .fill(Color("theme_light_yellow"))
-                                    }else{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke()
-                                            .foregroundColor(.yellow)
+                                        Circle().fill(Color("theme_light_yellow"))
                                     }
                                 }
                                 .foregroundColor(isToday ? .white : .black)
