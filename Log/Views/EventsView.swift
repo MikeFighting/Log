@@ -113,7 +113,7 @@ struct EventsView: View {
             }
             Section {
                 if getEvents(for: selectDay).isEmpty {
-                    HomeEmptyView()
+                    HomeEmptyView().listRowSeparator(.hidden)
                 } else {
                     ForEach(getEvents(for: selectDay)) { event in
                         let tag = getTag(name: event.tagId)

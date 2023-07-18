@@ -11,9 +11,10 @@ struct HomeEmptyView: View {
     @State var animate:Bool = false
     var body: some View {
         VStack(alignment: .trailing, spacing:5){
+            Spacer().frame(height:30)
             HStack{
                 Spacer()
-                Text("还没有记录，赶快点击").font(.title2)
+                Text("还没有记录，赶快点击").font(.title2).fontWeight(.semibold).foregroundColor(.accentColor)
                 Spacer()
                 Text("☝️")
                     .font(animate ?.largeTitle : .title2)

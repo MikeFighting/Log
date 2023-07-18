@@ -34,7 +34,6 @@ struct AddRecord: View {
         VStack (){
             Text("添加记录")
                 .font(.title2)
-                .fontWeight(.semibold)
             
             TextField(text: $title) {
                 Text("请输入标题")
@@ -47,7 +46,7 @@ struct AddRecord: View {
                     .foregroundColor(Color("input_text_bg_color"))
             }
             HStack{
-                Text("记录详情:").font(.title3)
+                Text("记录详情")
                 Spacer()
             }
             TextEditor(text: $description)
@@ -66,19 +65,21 @@ struct AddRecord: View {
                 }
             HStack(spacing:10){
                 DatePicker(selection: $beginDate, displayedComponents: [.hourAndMinute]) {
-                    Text("开始").frame(maxWidth:.infinity, alignment: .leading)
+                    Text("开始")
+                        .frame(maxWidth:.infinity, alignment: .leading)
                 }.frame(maxWidth:.infinity, alignment: .leading)
                 
                 Spacer().frame(width:50)
-                DatePicker("结束", selection: $endDate, in:beginDate...Date.distantFuture, displayedComponents: [.hourAndMinute]).onSubmit {
-                    debugPrint("end Date is \(endDate)")
+                DatePicker(selection: $endDate, in:beginDate...Date.distantFuture, displayedComponents: [.hourAndMinute]) {
+                    Text("结束")
+                        .frame(maxWidth:.infinity, alignment: .leading)
                 }
-                
                 
             }.frame(maxWidth:.infinity)
             
             HStack {
-                Text("选择标签:").padding(.vertical, 8)
+                Text("选择标签")
+                    .padding(.vertical, 8)
                 Spacer()
             }
             
