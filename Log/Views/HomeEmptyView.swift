@@ -10,20 +10,17 @@ import SwiftUI
 struct HomeEmptyView: View {
     @State var animate:Bool = false
     var body: some View {
-        VStack(spacing:5){
-
-            Text("还没有记录事项哦~").font(.title2)
+        VStack(alignment: .trailing, spacing:5){
             HStack{
-                Text("赶快点击").font(.title2)
+                Spacer()
+                Text("还没有记录，赶快点击").font(.title2)
+                Spacer()
                 Text("☝️")
-                    .font(animate ?.largeTitle : .title2 )
-            }
-            HStack{
-                Text("添加吧").font(.title2)
-                Text("😍")
-                    .font(animate ? .largeTitle : .title2)
+                    .font(animate ?.largeTitle : .title2)
+                    .padding(.trailing, 15)
             }
         }
+        .frame(maxWidth:.infinity)
         .onAppear(perform: {
             withAnimation(
                 .easeInOut(duration: 1)
