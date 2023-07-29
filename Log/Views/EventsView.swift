@@ -87,8 +87,8 @@ struct EventsView: View {
                                         Circle().fill(Color("theme_light_yellow"))
                                     }
                                 }
-                                .foregroundColor(isToday ? .white : .black)
-                                .fontWeight(isToday ? .bold : .medium)
+                                .foregroundColor(Color("date_num_color"))
+                                .fontWeight((isToday || isSelectDay) ? .bold : .medium)
                                 .onTapGesture {
                                     selectDay = date
                                     print("clicked on \(date)")

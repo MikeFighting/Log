@@ -36,7 +36,9 @@ struct AddRecord: View {
                 .font(.title2)
             
             TextField(text: $title) {
+                
                 Text("请输入标题")
+                    
             }
             .submitLabel(.done)
             .padding(8)
