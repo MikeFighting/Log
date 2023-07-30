@@ -84,20 +84,16 @@ struct AddRecord: View {
                     .padding(.vertical, 8)
                 Spacer()
             }
-            
             WrappingHStack(allTags(), id: \.self){ tag in
                 HStack(spacing:5) {
                     if(tag.text == "+") {
                         Button {
                             showCustomTag = true
                         } label: {
-                            Image(systemName: "plus")
-                                .font(.title3)
-                                .fontWeight(.regular)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.accentColor, lineWidth: 1)
-                                }
+                            Image(systemName: "plus.circle")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(.yellow)
                         }
                     }else{
                         Text(tag.text)
