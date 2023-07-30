@@ -9,7 +9,7 @@ import SwiftUI
 import WrappingHStack
 
 
-struct AddRecord: View {
+struct AddLog: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
@@ -177,7 +177,7 @@ struct AddRecord: View {
     }
 }
 
-extension AddRecord {
+extension AddLog {
     var colums:[GridItem] {
         [
             GridItem(.adaptive(minimum: 80), spacing: 10)

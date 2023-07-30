@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecordRow: View {
+struct LogRow: View {
     
     var title: String
     var subTitle: String
@@ -44,6 +44,6 @@ struct RecordRow: View {
 
 struct RecordRow_Previews: PreviewProvider {
     static var previews: some View {
-        RecordRow(title: "看书", subTitle: "看明朝那些事", beginTime: Date.distantPast, endTime: Date.distantFuture)
+        LogRow(title: "看书", subTitle: "看明朝那些事", beginTime: Date.distantPast, endTime: Date.distantFuture)
     }
 }

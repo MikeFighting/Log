@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EventsView: View {
+struct Home: View {
     
     @EnvironmentObject var eventViewModel: EventViewModel
     @State private var yearNum = 2023
@@ -168,7 +168,7 @@ struct EventsView: View {
             monthNum = yearAndMonth.month
             
         }.sheet(isPresented: $showAddSheet) {
-            AddRecord(beginDate: $selectDay, endDate: $selectDay)
+            AddLog(beginDate: $selectDay, endDate: $selectDay)
         }
     }
     
@@ -286,6 +286,6 @@ extension Date {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EventsView()
+        Home()
     }
 }

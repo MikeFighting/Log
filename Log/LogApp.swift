@@ -12,7 +12,7 @@ struct LogApp: App {
     @StateObject var eventViewModel = EventViewModel()
     var body: some Scene {
         WindowGroup {
-            EventsView()
+            Home()
                 .environmentObject(eventViewModel)
         }
     }
