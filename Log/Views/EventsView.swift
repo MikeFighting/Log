@@ -10,10 +10,11 @@ import SwiftUI
 struct EventsView: View {
     
     @EnvironmentObject var eventViewModel: EventViewModel
-    @State var yearNum = 2023
-    @State var monthNum = 6
-    @State var showAddSheet = false
-    @State var selectDay = Date()
+    @State private var yearNum = 2023
+    @State private var monthNum = 6
+    @State private var showAddSheet = false
+    @State private var selectDay = Date()
+    var emptyDate = Date.distantPast
     
     let weeks = ["一", "二", "三", "四", "五", "六", "日"]
     
@@ -73,11 +74,12 @@ struct EventsView: View {
                 LazyVGrid(columns: conlumns) {
                     ForEach(daysOneMonth, id: \.self) {
                         let date = $0
+                        let isEmptyDate = date == emptyDate
                         let day = getDayNumForDate(date: date)
                         let isToday = date.isEqule(date: Date())
                         let isSelectDay = date.isEqule(date: selectDay)
                         VStack {
-                            Text("\(day)")
+                            Text("\(isEmptyDate ? "": String(day))")
                                 .frame(width: 45,height: 45)
                                 .font(.body)
                                 .background {
@@ -232,10 +234,32 @@ struct EventsView: View {
         }
         
         let range = calendar.range(of: .day, in: .month, for: startDateOfMonth)
-        let dates = range?.map({ day in
+        var dates:[Date]? = range?.map({ day in
             return calendar.date(bySetting: .day, value: day, of: startDateOfMonth)!
         })
         
+        var comps:DateComponents = DateComponents()
+        var monthBeginIndex = 0;
+        if let firstDay = dates?.first {
+            comps = calendar.dateComponents([.weekday], from: firstDay)
+            //["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]
+            /*
+             第几天  空几天
+             1 --> 6
+             2 --> 0
+             3 --> 1
+             4 --> 2
+             5 --> 3
+             6 --> 4
+             7 --> 5
+             规律：(i + 5) % 7
+             */
+            monthBeginIndex = (comps.weekday! + 5) % 7
+            print("comps.weekday = \(String(describing: comps.weekday))")
+        }
+        for _ in 0..<monthBeginIndex {
+            dates?.insert(emptyDate, at: 0)
+        }
         return dates;
     }
     
